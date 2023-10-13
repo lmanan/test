@@ -1,0 +1,19 @@
+===================
+Welcome to Cellulus
+===================
+
+**Cellulus** is an unsupervised, deep learning approach for performing instance segmentation in biomedical microscopy data. No ground truth annotations are needed for training the model.
+
+This work was accepted to the International Conference for Computer Vision (ICCV 2023, Paris) and is available `here <https://openaccess.thecvf.com/content/ICCV2023/papers/Wolf_Unsupervised_Learning_of_Object-Centric_Embeddings_for_Cell_Instance_Segmentation_in_ICCV_2023_paper.pdf>`_.
+
+.. image:: ./_static/home/fig-01.png
+  :width: 800
+  :alt: Unsupervised Instance Segmentation for a variety of biomedical data
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   ./quickstart.rst
+   ./api.rst

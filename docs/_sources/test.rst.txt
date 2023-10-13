@@ -1,0 +1,58 @@
+=============
+Quick Start
+=============
+
+
+.. automodule:: cellulus
+  :noindex:
+
+In this tutorial, we will use Cellulus to segment gray-scale images of **Fluo-N2DL-HeLa** available on the `Cell Tracking Challenge <http://celltrackingchallenge.net/2d-datasets/>`_ webpage.
+
+
+Firstly, a subset of the original *tif* raw images are downloaded.
+
+.. jupyter-execute::
+ 
+  name = "Fluo-N2DL-HeLa" 
+  data_dir = "./data"
+  
+  import cellulus
+  from cellulus.utils.misc import extract_data
+  extract_data(
+    zip_url="https://github.com/funkelab/cellulus/releases/download/v0.0.1-tag/Fluo-N2DL-HeLa.zip",
+    data_dir=data_dir,
+    project_name=name,
+  )
+
+
+Next, these raw images are intensity-normalized.
+
+.. jupyter-execute::
+
+  import numpy as np, zarr, tifffile, os
+  from tqdm import tqdm
+  from glob import glob
+  from csbdeep.utils import normalize
+
+  container_path = zarr.open(name+".zarr")
+  dataset_name = 'train/raw'
+  image_filenames = sorted(glob(os.path.join(data_dir, name, "images/*.tif")))
+  print(f"Number of raw images is {len(image_filenames)}")
+
+
+Let's now explore ipywidgets interact mode.
+
+.. jupyter-execute::
+
+  from __future__ import print_function
+  from ipywidgets import interact, interactive, fixed, interact_manual
+  import ipywidgets as widgets
+  import matplotlib.pyplot as plt
+  import tifffile
+
+  def f(x):
+    plt.imshow(tifffile.imread(image_filenames[x-1]))
+    return None
+
+ 
+  interact(f, x=widgets.IntSlider(min=1, max=len(image_filenames), step=1, value=1));
